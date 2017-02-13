@@ -18,10 +18,10 @@ FILES_O = $(addsuffix .o,$(FILES))
 all : ocb-interp.byte ocb-compile.byte
 
 ocb-interp.byte :
-	ocamlbuild -use-ocamlfind interp.byte
+	rebuild -use-ocamlfind interp.byte
 
 ocb-interp.native :
-	ocamlbuild -use-ocamlfind interp.native
+	rebuild -use-ocamlfind interp.native
 
 interp.byte : $(FILES_CMO)
 	ocamlfind ocamlc -linkpkg -package $(PACKAGES) $(FILES_CMO) -o $@
@@ -30,10 +30,10 @@ interp.native : $(FILES_CMX)
 	ocamlfind ocamlopt -linkpkg -package $(PACKAGES) $(FILES_CMX) -o $@
 
 ocb-compile.byte :
-	ocamlbuild -use-ocamlfind compile.byte
+	rebuild -use-ocamlfind compile.byte
 
 ocb-compile.native :
-	ocamlbuild -use-ocamlfind compile.native
+	rebuild -use-ocamlfind compile.native
 
 compile.byte : $(FILES_CMO)
 	ocamlfind ocamlc -linkpkg -package $(PACKAGES) $(FILES_CMO) -o $@
@@ -53,7 +53,7 @@ compile.native : $(FILES_CMX)
 .PHONY : depend clean
 
 clean :
-	ocamlbuild -clean
+	rebuild -clean
 	rm -f $(FILES_CMI) $(FILES_CMTI) $(FILES_CMT) $(FILES_CMO) $(FILES_CMX) $(FILES_O) compile.byte compile.native interp.byte interp.native
 
 depend :

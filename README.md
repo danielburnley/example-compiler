@@ -2,6 +2,42 @@ A simple compiler for a simple imperative language targeting x86-64 assembly
 (for systems that follow the System V ABI, so most operating systems **except**
 Windows).
 
+Differences from [original](https://github.com/SOwens/example-compiler)
+--------------------
+
+This repo has been updated to be compatible with both OCaml and
+[Reason](http://facebook.github.io/reason/). Therefore you are required to also have Reason installed.
+
+Once you have installed this, it is possible to use both `.re` files and `.ml` files in the source code.
+
+Installing Reason
+-----------------
+
+As this complier requires Reason, you will need to install it. This is simple using `opam`. However, the `opam` repo is slightly behind the most up to date version, so it is recommended to use opam's pin functionality to keep up to date.
+
+```
+opam pin add reason git://github.com/facebook/reason.git
+opam install reason
+```
+
+After this, take a look at Reasons [tools](http://facebook.github.io/reason/tools.html) page for instructions on integrating it with various editors. As well as for information regarding the `[@implicit_arity]` tags you might see after converting from OCaml to Reason.
+
+Converting from OCaml to Reason
+-------------------------------
+
+If you wish to convert existing files to Reason, you can do this using Reason's provided `refmt` tool.
+
+For example, if you wished to convert the file "foo.ml" to "foo.re" you can do the following:
+
+```
+refmt --parse ml --print re foo.ml > foo.re
+```
+
+To convert back:
+```
+refmt --parse re --print ml foo.re > foo.ml
+```
+
 Running the compiler
 --------------------
 
